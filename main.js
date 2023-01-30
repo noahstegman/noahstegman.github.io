@@ -18,23 +18,33 @@ function choose(choice) {
     else if (enemy == 2){
         enemy = "Scissors";
     }
-    if (play(player, enemy) == "Victory"){
+    var round = play(player, enemy);
+    if (round == "Victory"){
         player_score++;
         win = "Victory!"
-    } else if (play(player, enemy) == "Loss"){
+    } else if (round == "Loss"){
         enemy_score++;
         win = "Loss!"
     } else {
         win = "Tie!"
     }
+    var typing = {
+        strings: [round + '...'],
+        typeSpeed: 40
+    };
     $('#' + choice).addClass("youchoice")
-    sleep(1000).then(() => { $('#' + enemy).addClass("enemychoice") });
-    sleep(2000).then(() => { 
+    sleep(1000).then(() => { 
+        $("#rez").html("")
+        var typed = new Typed('#rez', typing);
+        $('#' + enemy).addClass("enemychoice");
+    });
+    sleep(2500).then(() => { 
         $("#playerscore").html(player_score);
         $("#enemyscore").html(enemy_score);
         $("#blocker").hide();
         $('#' + choice).removeClass("youchoice");
         $('#' + enemy).removeClass("enemychoice");
+        $('#rez').html("Rock, Paper, Scissors!")
     });
     
     }
