@@ -5,11 +5,24 @@
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
+        <div id="blocker"></div>
         <div class="site">
             <div class="nav">
                 <h1 id="rez">Rock, Paper, Scissors!</h1>
             </div>
-            <div id="iftie"></div>
+            <div class="game">
+                <div id="view">
+                    <div class="choice" onclick="choose('Rock')" id="Rock">
+                        <img src="rock.png"/>
+                    </div>
+                    <div class="choice" onclick="choose('Paper')" id="Paper">
+                        <img src="paper.png"/>
+                    </div>
+                    <div class="choice" onclick="choose('Scissors')" id="Scissors">
+                        <img src="scissors.png"/>
+                    </div>
+                </div>
+            </div>
             <div id="results">
                 <div>
                     <div class="titlz">
@@ -28,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="options">
+            <!--<div class="options">
                 <div class="but">
                     <button onclick="choose('Rock')">Rock</button>
                 </div>
@@ -38,8 +51,9 @@
                 <div class="but">
                     <button onclick="choose('Scissors')">Scissors</button>
                 </div>
-            </div>
+            </div>-->
         </div>
+    
 
 
         
@@ -48,9 +62,14 @@
         
     </body>
     <script>
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
         let player_score = 0;
         let enemy_score = 0;
         function choose(choice) {
+            document.getElementById("blocker").style.display = 'block';
             let player = choice;
             var win;
             let enemy = Math.floor(Math.random() * 3);
@@ -72,9 +91,16 @@
             } else {
                 win = "Tie!"
             }
-            document.getElementById("playerscore").innerHTML = player_score.toString();
-            document.getElementById("enemyscore").innerHTML = enemy_score.toString();
-            document.getElementById("iftie").innerHTML = win;
+            document.getElementById(choice).classList.add("youchoice");
+            sleep(1000).then(() => { document.getElementById(enemy).classList.add("enemychoice"); });
+            sleep(2000).then(() => { 
+                document.getElementById("playerscore").innerHTML = player_score.toString();
+                document.getElementById("enemyscore").innerHTML = enemy_score.toString();
+                document.getElementById("blocker").style.display = 'none';
+                document.getElementById(choice).classList.remove("youchoice");
+                document.getElementById(enemy).classList.remove("enemychoice");
+            });
+            
             }
 
         
