@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html id="blah">
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div class="site">
+            <div class="nav">
+                <h1 id="rez">Rock, Paper, Scissors!</h1>
+            </div>
+            <div id="iftie"></div>
+            <div id="results">
+                <div>
+                    <div class="titlz">
+                        You
+                    </div>
+                    <div>
+                        <span id="playerscore">0</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="titlz">
+                        Computer
+                    </div>
+                    <div>
+                        <span id="enemyscore">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="options">
+                <div class="but">
+                    <button onclick="choose('Rock')">Rock</button>
+                </div>
+                <div class="but">
+                    <button onclick="choose('Paper')">Paper</button>
+                </div>
+                <div class="but">
+                    <button onclick="choose('Scissors')">Scissors</button>
+                </div>
+            </div>
+        </div>
+
+
+        
+
+        
+        
+    </body>
+    <script>
+        let player_score = 0;
+        let enemy_score = 0;
+        function choose(choice) {
+            let player = choice;
+            var win;
+            let enemy = Math.floor(Math.random() * 3);
+            if(enemy == 0){
+                enemy = "Rock";
+            }
+            else if(enemy == 1){
+                enemy = "Paper";
+            }
+            else if (enemy == 2){
+                enemy = "Scissors";
+            }
+            if (play(player, enemy) == "Victory"){
+                player_score++;
+                win = "Victory!"
+            } else if (play(player, enemy) == "Loss"){
+                enemy_score++;
+                win = "Loss!"
+            } else {
+                win = "Tie!"
+            }
+            document.getElementById("playerscore").innerHTML = player_score.toString();
+            document.getElementById("enemyscore").innerHTML = enemy_score.toString();
+            document.getElementById("iftie").innerHTML = win;
+            }
+
+        
+        function play(choice, enemy) {
+
+            if(enemy == "Rock" && choice == "Rock"){
+               return "Tie";
+            }
+            else if (enemy == "Rock" && choice == "Paper"){
+                return "Victory";
+            }
+            else if (enemy == "Rock" && choice == "Scissors"){
+                return "Loss";
+            }
+            else if (enemy == "Paper" && choice == "Scissors"){
+                return "Victory";
+            }
+            else if (enemy == "Paper" && choice == "Paper"){
+                return "Tie";
+            }
+            else if (enemy == "Paper" && choice == "Rock"){
+                return "Loss";
+            }
+            else if (enemy == "Scissors" && choice == "Rock"){
+                return "Victory";
+            }
+            else if (enemy == "Scissors" && choice == "Paper"){
+                return "Loss";
+            }
+            else if (enemy == "Scissors" && choice == "Scissors"){
+                return "Tie";
+            }
+        }
+
+    </script>
+</html>
